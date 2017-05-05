@@ -28,6 +28,36 @@ int MyModel::columnCount(const QModelIndex &parent) const
     return 3;
 }
 
+QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole)
+    {
+        if (orientation == Qt::Horizontal) {
+            switch (section)
+            {
+            case 0:
+                return QString("first");
+            case 1:
+                return QString("second");
+            case 2:
+                return QString("third");
+            }
+        }
+        if (orientation == Qt::Vertical) {
+            switch (section)
+            {
+            case 0:
+                return QString("Ver-first");
+            case 1:
+                return QString("Ver-second");
+            case 2:
+                return QString("Ver-third");
+            }
+        }
+    }
+    return QVariant();
+}
+
 QVariant MyModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
