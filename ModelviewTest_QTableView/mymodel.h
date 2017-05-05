@@ -2,6 +2,8 @@
 #define MYMODEL
 #include<QAbstractTableModel>
 
+class QTimer;
+
 class MyModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -14,6 +16,11 @@ public:
 
 private:
     char m_chData[2][3];
+
+public:
+    QTimer* m_pTimer;
+public slots:
+    void timerHit();
 };
 
 #endif // MYMODEL
