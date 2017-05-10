@@ -1,6 +1,7 @@
 #ifndef MYMODEL
 #define MYMODEL
 #include<QAbstractTableModel>
+#include"camerastatus.h"
 
 class QTimer;
 
@@ -15,8 +16,11 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
+    bool AddData(QString ip, QString status);
+    void ModifyData(QString ip, QString status);
 private:
     char m_chData[2][3];
+    CameraStatusList m_CamStatusList;
 
 public:
     QTimer* m_pTimer;
