@@ -1,9 +1,13 @@
 #ifndef MYMODEL
 #define MYMODEL
 #include<QAbstractTableModel>
-#include"camerastatus.h"
+#include<QString>
+
 
 class QTimer;
+
+const int COLS = 3;
+const int ROWS = 2;
 
 class MyModel : public QAbstractTableModel
 {
@@ -15,17 +19,16 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) Q_DECL_OVERRIDE;
 
-    bool AddData(QString ip, QString status);
-    void ModifyData(QString ip, QString status);
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+
 private:
-    char m_chData[2][3];
-    CameraStatusList m_CamStatusList;
+    QString m_gridData[ROWS][COLS];
 
-public:
-    QTimer* m_pTimer;
-public slots:
-    void timerHit();
+signals:
+    void editCompleted(const QString&);
+
 };
 
 #endif // MYMODEL
